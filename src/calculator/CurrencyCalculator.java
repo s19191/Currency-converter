@@ -1,3 +1,5 @@
+package calculator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -6,7 +8,8 @@ import java.util.Map;
 
 public class CurrencyCalculator {
 
-    public void showGui(Map<String, Double> currencyRates) {
+    public void showGui(Map<String, Double> currencyRates) throws NullPointerException {
+        if (currencyRates == null) throw new NullPointerException();
         SwingUtilities.invokeLater(() -> {
             JFrame jf = new JFrame("Currency converter");
             jf.setPreferredSize(new Dimension(1080,720));
@@ -17,7 +20,7 @@ public class CurrencyCalculator {
             }
             JList currencyJList = new JList(l1);
             currencyJList.setDragEnabled(false);
-            //TODO: Żeby można było wybrać tylko 1
+            currencyJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             JPanel currencyJPanel = new JPanel();
             currencyJPanel.setLayout(new GridLayout(0,1));
             currencyJPanel.add(currencyJList);

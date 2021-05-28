@@ -1,6 +1,7 @@
-import org.xml.sax.SAXException;
+import calculator.CurrencyCalculator;
+import calculator.XmlParser;
 
-import javax.xml.parsers.ParserConfigurationException;
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 
@@ -9,9 +10,13 @@ public class CurrencyConverter {
         CurrencyCalculator currencyCalculator = new CurrencyCalculator();
         try {
             XmlParser xmlParser = new XmlParser("exchangeRate.xml", new URL("https://www.ecb.europa.eu/stats/eurofxref/eurofxref-daily.xml"));
-            currencyCalculator.showGui(xmlParser.getCurrencyMap2());
-        } catch (IOException | ParserConfigurationException | SAXException e) {
-            e.printStackTrace();
+            try {
+                currencyCalculator.showGui(xmlParser.getCurrencyMap());
+            } catch(Exception exc) {
+                JOptionPane.showMessageDialog(null, "Creation failed, " + exc);
+            }
+        } catch (IOException exe) {
+            exe.printStackTrace();
         }
     }
 }
