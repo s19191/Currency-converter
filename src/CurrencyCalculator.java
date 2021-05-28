@@ -12,12 +12,12 @@ public class CurrencyCalculator {
             jf.setPreferredSize(new Dimension(1080,720));
 
             DefaultListModel<String> l1 = new DefaultListModel<>();
-            Map<String, Double> currencyMap = null;
             for (String s: currencyRates.keySet()) {
                 l1.addElement(s);
             }
             JList currencyJList = new JList(l1);
             currencyJList.setDragEnabled(false);
+            //TODO: Żeby można było wybrać tylko 1
             JPanel currencyJPanel = new JPanel();
             currencyJPanel.setLayout(new GridLayout(0,1));
             currencyJPanel.add(currencyJList);
@@ -52,7 +52,10 @@ public class CurrencyCalculator {
                 if (currencyJList.isSelectionEmpty()) {
                     JOptionPane.showMessageDialog(null, "You have to choose currency!");
                 } else {
-                    resultJLabel.setText(calculate(currencyRates.get((String) currencyJList.getSelectedValue()), Double.parseDouble(numberJTextField.getText().replace(",","."))) + " " + currencyJList.getSelectedValue());
+                    resultJLabel.setText(calculate(
+                            currencyRates.get((String) currencyJList.getSelectedValue()),
+                            Double.parseDouble(numberJTextField.getText().replace(",","."))) + " " + currencyJList.getSelectedValue()
+                    );
                 }
             });
 
