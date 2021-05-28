@@ -58,21 +58,19 @@ public class XmlParser {
     }
 
     public Map<String, Double> getCurrencyMap2() throws IOException, ParserConfigurationException, SAXException {
-        Map<String, Double> currencyRates = new HashMap<>();
-        File inputFile = new File(fileOutput);
         DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-        Document doc = dBuilder.parse(inputFile);
+        Document doc = dBuilder.parse(new File(fileOutput));
         doc.getDocumentElement().normalize();
         NodeList nList = doc.getElementsByTagName("Cube");
 
-        for (int temp = 0; temp < nList.getLength(); temp++) {
-            Node nNode = nList.item(temp);
-
+        Map<String, Double> currencyRates = new HashMap<>();
+        for (int i = 0; i < nList.getLength(); i++) {
+            Node nNode = nList.item(i);
             if (nNode.getNodeType() == Node.ELEMENT_NODE) {
                 Element eElement = (Element) nNode;
                 if (!eElement.getAttribute("currency").isEmpty()) {
-                    currencyRates.put(eElement.getAttribute("currency"),Double.parseDouble(eElement.getAttribute("rate")));
+                    currencyRates.put(eElement.getAttribute("currency"), Double.parseDouble(eElement.getAttribute("rate")));
                 }
             }
         }
