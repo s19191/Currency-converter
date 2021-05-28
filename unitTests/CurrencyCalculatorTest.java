@@ -1,4 +1,3 @@
-import calculator.CurrencyCalculator;
 import org.junit.Test;
 
 import java.util.HashMap;
