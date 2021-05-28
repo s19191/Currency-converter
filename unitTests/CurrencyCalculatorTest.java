@@ -1,5 +1,3 @@
-package unitTests;
-
 import calculator.CurrencyCalculator;
 import org.junit.Test;
 
